@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="51cd2f28-c4fd-4ec2-a571-b69f9ac5ca7d" >
+		<http:listener-connection host="0.0.0.0" port="8081" protocol="HTTPS">
+			<tls:context >
+				<tls:key-store type="jceks" path="keystore.jks" alias="mykeyalias" keyPassword="${keystore.password}" password="${keystore.password}" />
+			</tls:context>
+		</http:listener-connection>
+	</http:listener-config>
+	<flow name="example-projectFlow" doc:id="42b71cd5-8a2c-46e5-b790-a6f61c8b6d61" >
+		<http:listener doc:name="Listener" doc:id="7227cfb0-8aa8-4e7c-8356-554e6f1afd80" config-ref="HTTP_Listener_config" path="/"/>
+		<ee:transform doc:name="Transform Message" doc:id="a1d741fb-8490-46be-bdca-8fdbd0edb7fc" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	success : true
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+<!-- 		<logger level="INFO" doc:name="Logger" doc:id="4a641af5-76fe-490e-b512-381a1319af95" message="#[%dw 2.0&#10;import logger from dw::logging::formatter&#10;-&#45;&#45;&#10;logger(&#10;&quot;This is what I want to log&quot;, &#10;&quot;Deliveries&quot;, &#10;&quot;transaction-details&quot;, &#10;correlationId, &#10;p('env'),&#10;p('application.name')&#10;)]"/>
+		<logger level="INFO" doc:name="Log Test" doc:id="957caede-7bad-48a0-8527-c4a965039a5f" message="#[%dw 2.0&#10;import base64logger from dw::logging::formatter&#10;-&#45;&#45;&#10;base64logger(&#10;&quot;This is what I want to log&quot;, &#10;&quot;Deliveries&quot;, &#10;&quot;transaction-details&quot;, &#10;correlationId, &#10;p('env'),&#10;p('application.name')&#10;)]"/> -->
+	</flow>
+</mule>
