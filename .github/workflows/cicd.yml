@@ -1,0 +1,24 @@
+name: CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  ci-cd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Call the checkout workflow from the original repository
+      - name: Checkout
+        uses: ankgoya1/pr/.github/workflows/checkout.yml
+
+      # Call the build workflow from the original repository
+      - name: Build
+        uses: ankgoya1/pr/.github/workflows/build.yml
+
+      # Call the publish workflow from the original repository
+      - name: Publish
+        uses: ankgoya1/pr/.github/workflows/publish.yml
