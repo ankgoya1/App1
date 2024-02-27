@@ -9,7 +9,9 @@ jobs:
     uses: ankgoya1/pr/.github/workflows/checkout.yml@main
 
   Build:
+    needs: Checkout
     uses: ankgoya1/pr/.github/workflows/build.yml@main
 
   Publish:
+    needs: Build
     uses: ankgoya1/pr/.github/workflows/publish.yml@main
