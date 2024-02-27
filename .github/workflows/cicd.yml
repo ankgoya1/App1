@@ -6,10 +6,21 @@ on:
       - main
 jobs:
   Checkout:
-    uses: ankgoya1/pr/.github/workflows/checkout.yml@main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
   Build:
-    uses: ankgoya1/pr/.github/workflows/build.yml@main
+    runs-on: ubuntu-latest
+    needs: Checkout
+    steps:
+      - name: Build
+        uses: ankgoya1/pr/.github/workflows/build.yml@main
 
   Publish:
-    uses: ankgoya1/pr/.github/workflows/publish.yml@main
+    runs-on: ubuntu-latest
+    needs: Build
+    steps:
+      - name: Publish
+        uses: ankgoya1/pr/.github/workflows/publish.yml@main
