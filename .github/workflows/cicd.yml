@@ -13,12 +13,12 @@ jobs:
 
       # Call the checkout workflow from the original repository
       - name: Checkout
-        uses: ankgoya1/pr/.github/workflows/checkout.yml
+        uses: ankgoya1/pr/.github/workflows/checkout.yml@main
 
       # Call the build workflow from the original repository
       - name: Build
-        uses: ankgoya1/pr/.github/workflows/build.yml
+        uses: ankgoya1/pr/.github/workflows/build.yml@main
 
       # Call the publish workflow from the original repository
       - name: Publish
-        uses: ankgoya1/pr/.github/workflows/publish.yml
+        uses: ankgoya1/pr/.github/workflows/publish.yml@main
