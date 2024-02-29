@@ -10,14 +10,27 @@ env:
   USER: ${{ secrets.USER }}
   
 jobs:
+  # Variables:
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     my_var: ${{ env.MY_VAR }}
+  #     user: ${{ secrets.USER }}
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+  
   Variables:
     runs-on: ubuntu-latest
     outputs:
-      my_var: ${{ env.MY_VAR }}
-      user: ${{ secrets.USER }}
+      my_var: ${{ steps.set_output.outputs.my_var }}
+      user: ${{ steps.set_output.outputs.user }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Set output variables
+        id: set_output
+        run: echo "::set-output name=my_var::${MY_VAR}" && echo "::set-output name=user::${USER}"
+        
   Checkout:
     needs: Variables
     uses: ankgoya1/pr/.github/workflows/checkout.yml@main
