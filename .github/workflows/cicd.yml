@@ -8,11 +8,13 @@ env:
   MY_VAR: Testing
 
 jobs:
-  # Variables:
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     my_var: ${{ steps.set_output.outputs.my_var }}
-  #     user: ${{ steps.set_output.outputs.user }}
+  Variables:
+    needs: [ ]
+    runs-on: ubuntu-latest
+    outputs:
+      my_var: ${{ steps.set_output.outputs.MY_VAR }}
+      user: Ankit
+      
   #   steps: 
   #     # - name: Checkout code
   #     #   uses: actions/checkout@v2
@@ -22,6 +24,7 @@ jobs:
   #         echo "::set-output name=my_var::${MY_VAR}"
   #         echo "::set-output name=user::${USER}"
   Print:
+    needs: Variables
     runs-on: ubuntu-latest
     steps:
       - name: Print Value
@@ -35,12 +38,9 @@ jobs:
   # Build:
   #   needs: Checkout
   #   uses: ankgoya1/pr/.github/workflows/build.yml@main
-
   Publish:
-    # needs: Build
-    with:
-      # MY_VAR: ${{ needs.Variables.outputs.my_var }}
-      # USER: ${{ needs.Variables.outputs.user }}
-      # USER: ${{ secrets.USER }}
-        VAR: $MY_VAR
+    needs: Checkout
     uses: ankgoya1/pr/.github/workflows/publish.yml@main
+    with:
+      VAR: ${{ needs.Variables.outputs.my_var }}
+      USER_SECRET: ${{ secrets.USER }}
