@@ -4,31 +4,37 @@ on:
   push:
     branches:
       - main
+
 env:
   MY_VAR: Testing
   USER: ${{ secrets.USER }}
   
 jobs:
-  Variables:
+  Checkout:
     runs-on: ubuntu-latest
     outputs:
       my_var: ${{ env.MY_VAR }}
       user: ${{ secrets.USER }}
-        
-  Checkout:
-    needs: Variables
-    uses: ankgoya1/pr/.github/workflows/checkout.yml@main
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
   Build:
     needs: Checkout
-    uses: ankgoya1/pr/.github/workflows/build.yml@main
-    
+    runs-on: ubuntu-latest
+    env:
+      MY_VAR: ${{ needs.Checkout.outputs.my_var }}
+      USER: ${{ needs.Checkout.outputs.user }}
+    steps:
+      - name: Run Build
+        uses: ankgoya1/pr/.github/workflows/build.yml@main
+
   Publish:
     needs: Build
     runs-on: ubuntu-latest
     env:
-      MY_VAR: ${{ needs.Variables.outputs.my_var }}
-      USER: ${{ needs.Variables.outputs.user }}
+      MY_VAR: ${{ needs.Checkout.outputs.my_var }}
+      USER: ${{ needs.Checkout.outputs.user }}
     steps:
-      - name: Run Build
+      - name: Run Publish
         uses: ankgoya1/pr/.github/workflows/publish.yml@main
