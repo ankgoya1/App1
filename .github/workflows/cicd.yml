@@ -23,13 +23,13 @@ jobs:
           echo "::set-output name=MY_VAR::${MY_VAR}"
           echo "::set-output name=USER::${USER}"
 
-  # Print:
-  #   needs: Variables
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Print Value
-  #       run: |
-  #         echo "value is: $MY_VAR"
+  Print:
+    needs: Variables
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Value
+        run: |
+          echo "value is: $MY_VAR"
 
   Checkout:
     uses: ankgoya1/pr/.github/workflows/checkout.yml@main
