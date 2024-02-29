@@ -9,13 +9,26 @@ env:
   USER: ${{ secrets.USER }}
   
 jobs:
+  Variables:
+    runs-on: ubuntu-latest
+    outputs:
+      my_var: ${{ env.MY_VAR }}
+      user: ${{ secrets.USER }}
+        
   Checkout:
+    needs: Variables
     uses: ankgoya1/pr/.github/workflows/checkout.yml@main
 
   Build:
     needs: Checkout
     uses: ankgoya1/pr/.github/workflows/build.yml@main
-
+    
   Publish:
     needs: Build
-    uses: ankgoya1/pr/.github/workflows/publish.yml@main
+    runs-on: ubuntu-latest
+    env:
+      MY_VAR: ${{ needs.Variables.outputs.my_var }}
+      USER: ${{ needs.Variables.outputs.user }}
+    steps:
+      - name: Run Build
+        uses: ankgoya1/pr/.github/workflows/publish.yml@main
