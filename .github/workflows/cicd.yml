@@ -10,15 +10,18 @@ env:
   USER: ${{ secrets.USER }}
   
 jobs:
-  Checkout:
+  Variables:
     runs-on: ubuntu-latest
     outputs:
       my_var: ${{ env.MY_VAR }}
       user: ${{ secrets.USER }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
+    # steps:
+    #   - name: Checkout code
+    #     uses: actions/checkout@v2
+  Checkout:
+    needs: Variables
+    uses: ankgoya1/pr/.github/workflows/checkout.yml@main
+    
   Build:
     needs: Checkout
     uses: ankgoya1/pr/.github/workflows/build.yml@main
@@ -27,5 +30,5 @@ jobs:
     needs: Build
     uses: ankgoya1/pr/.github/workflows/publish.yml@main
     with:
-      MY_VAR: ${{ needs.Build.outputs.my_var }}
-      USER: ${{ needs.Build.outputs.user }}
+      MY_VAR: ${{ needs.Variables.outputs.my_var }}
+      USER: ${{ needs.Variables.outputs.user }}
