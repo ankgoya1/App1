@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+env:
+  My_Var: Testing
+  
 jobs:
   Checkout:
     uses: ankgoya1/pr/.github/workflows/checkout.yml@main
