@@ -34,10 +34,7 @@ jobs:
 
   Publish:
     needs: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Publish
-        uses: ankgoya1/pr/.github/workflows/publish.yml@main
-        with:
-          MY_VAR: ${{ needs.Variables.outputs.my_var }}
-          USER: ${{ needs.Variables.outputs.user }}
+    uses: ankgoya1/pr/.github/workflows/publish.yml@main
+    with:
+      MY_VAR: ${{ needs.Variables.outputs.my_var }}
+      USER: ${{ needs.Variables.outputs.user }}
