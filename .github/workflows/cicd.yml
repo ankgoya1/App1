@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
 env:
   MY_VAR: Testing
 
@@ -14,30 +15,25 @@ jobs:
     outputs:
       my_var: ${{ steps.set_output.outputs.MY_VAR }}
       user: Ankit
-      
-  #   steps: 
-  #     # - name: Checkout code
-  #     #   uses: actions/checkout@v2
-  #     - name: Set output variables
-  #       id: set_output
-  #       run: |
-  #         echo "::set-output name=my_var::${MY_VAR}"
-  #         echo "::set-output name=user::${USER}"
-  Print:
-    needs: Variables
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print Value
+
+    steps: 
+      - name: Set output variables
+        id: set_output
         run: |
-          echo "value is: $MY_VAR"
+          echo "::set-output name=MY_VAR::${MY_VAR}"
+          echo "::set-output name=USER::${USER}"
+
+  # Print:
+  #   needs: Variables
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Print Value
+  #       run: |
+  #         echo "value is: $MY_VAR"
 
   Checkout:
-    # needs: Variables
     uses: ankgoya1/pr/.github/workflows/checkout.yml@main
-    
-  # Build:
-  #   needs: Checkout
-  #   uses: ankgoya1/pr/.github/workflows/build.yml@main
+
   Publish:
     needs: Checkout
     uses: ankgoya1/pr/.github/workflows/publish.yml@main
