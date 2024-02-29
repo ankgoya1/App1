@@ -32,6 +32,7 @@ jobs:
           echo "value is: $MY_VAR"
 
   Checkout:
+    needs: Print
     uses: ankgoya1/pr/.github/workflows/checkout.yml@main
 
   Publish:
