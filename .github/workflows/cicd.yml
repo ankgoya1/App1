@@ -21,6 +21,13 @@ jobs:
   #       run: |
   #         echo "::set-output name=my_var::${MY_VAR}"
   #         echo "::set-output name=user::${USER}"
+  Print:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Value
+        shell: bash
+        run: |
+          ehco "value is ${{ env.MY_VAR }}"
 
   Checkout:
     # needs: Variables
@@ -33,8 +40,8 @@ jobs:
   Publish:
     needs: Build
     uses: ankgoya1/pr/.github/workflows/publish.yml@main
-    with:
+    # with:
       # MY_VAR: ${{ needs.Variables.outputs.my_var }}
       # USER: ${{ needs.Variables.outputs.user }}
       # USER: ${{ secrets.USER }}
-      VAR: ${{ env.MY_VAR }}
+      # VAR: ${{ env.MY_VAR }}
