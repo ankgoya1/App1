@@ -5,7 +5,8 @@ on:
     branches:
       - main
 env:
-  My_Var: Testing
+  MY_VAR: Testing
+  USER: ${{ secrets.USER }}
   
 jobs:
   Checkout:
