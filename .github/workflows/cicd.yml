@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-
 env:
   MY_VAR: Testing
   USER: ${{ secrets.USER }}
@@ -38,4 +37,4 @@ jobs:
     with:
       # MY_VAR: ${{ needs.Variables.outputs.my_var }}
       # USER: ${{ needs.Variables.outputs.user }}
-      MY_VAR: ${{ env.MY_VAR }}
+      MY_VAR: $MY_VAR
