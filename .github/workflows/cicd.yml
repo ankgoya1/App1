@@ -38,6 +38,8 @@ jobs:
   Publish:
     needs: Checkout
     uses: ankgoya1/pr/.github/workflows/publish.yml@main
+    secrets:
+      token: ${{ secrets.USER }}
     with:
       VAR: ${{ needs.Variables.outputs.my_var }}
       # USER_SECRET: ${{ secrets.USER }}
