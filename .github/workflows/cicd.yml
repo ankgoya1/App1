@@ -38,8 +38,8 @@ jobs:
   Publish:
     needs: Checkout
     uses: ankgoya1/pr/.github/workflows/publish.yml@main
-    # with:
-    #   config-path: .github/labeler.yml
+    with:
+      config-path: .github/labeler.yml
     #   VAR: ${{ env.MY_VAR }}
     secrets:
       token: ${{ secrets.USER }}
