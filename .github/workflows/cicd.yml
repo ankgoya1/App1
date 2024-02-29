@@ -39,8 +39,8 @@ jobs:
   Publish:
     needs: Build
     uses: ankgoya1/pr/.github/workflows/publish.yml@main
-    # with:
+    with:
       # MY_VAR: ${{ needs.Variables.outputs.my_var }}
       # USER: ${{ needs.Variables.outputs.user }}
       # USER: ${{ secrets.USER }}
-      # VAR: ${{ env.MY_VAR }}
+        VAR: $MY_VAR
