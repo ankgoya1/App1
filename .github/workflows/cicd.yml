@@ -39,4 +39,4 @@ jobs:
     uses: ankgoya1/pr/.github/workflows/publish.yml@main
     with:
       VAR: ${{ needs.Variables.outputs.my_var }}
-      USER_SECRET: ${{ secrets.USER }}
+      # USER_SECRET: ${{ secrets.USER }}
