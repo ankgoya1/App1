@@ -1,4 +1,4 @@
-name: CI/CD Workflow
+name: App1
 
 on:
   push:
@@ -6,8 +6,7 @@ on:
       - main
 env:
   MY_VAR: Testing
-  USER: ${{ secrets.USER }}
-  
+
 jobs:
   # Variables:
   #   runs-on: ubuntu-latest
@@ -37,4 +36,5 @@ jobs:
     with:
       # MY_VAR: ${{ needs.Variables.outputs.my_var }}
       # USER: ${{ needs.Variables.outputs.user }}
-      MY_VAR: $MY_VAR
+      # USER: ${{ secrets.USER }}
+      VAR: ${{ env.MY_VAR }}
