@@ -26,7 +26,7 @@ jobs:
     steps:
       - name: Print Value
         run: |
-          echo "value is $MY_VAR"
+          echo "value is: $MY_VAR"
 
   Checkout:
     # needs: Variables
