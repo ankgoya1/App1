@@ -13,7 +13,7 @@ jobs:
   #   outputs:
   #     my_var: ${{ steps.set_output.outputs.my_var }}
   #     user: ${{ steps.set_output.outputs.user }}
-  #   steps:
+  #   steps: 
   #     # - name: Checkout code
   #     #   uses: actions/checkout@v2
   #     - name: Set output variables
@@ -32,12 +32,12 @@ jobs:
     # needs: Variables
     uses: ankgoya1/pr/.github/workflows/checkout.yml@main
     
-  Build:
-    needs: Checkout
-    uses: ankgoya1/pr/.github/workflows/build.yml@main
+  # Build:
+  #   needs: Checkout
+  #   uses: ankgoya1/pr/.github/workflows/build.yml@main
 
   Publish:
-    needs: Build
+    # needs: Build
     with:
       # MY_VAR: ${{ needs.Variables.outputs.my_var }}
       # USER: ${{ needs.Variables.outputs.user }}
