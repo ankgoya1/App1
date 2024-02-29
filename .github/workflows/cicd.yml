@@ -15,9 +15,9 @@ jobs:
     outputs:
       my_var: ${{ env.MY_VAR }}
       user: ${{ secrets.USER }}
-    # steps:
-    #   - name: Checkout code
-    #     uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
   Checkout:
     needs: Variables
     uses: ankgoya1/pr/.github/workflows/checkout.yml@main
