@@ -25,9 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print Value
-        shell: bash
         run: |
-          ehco "value is ${{ env.MY_VAR }}"
+          echo "value is $MY_VAR"
 
   Checkout:
     # needs: Variables
