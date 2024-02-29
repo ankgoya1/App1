@@ -21,20 +21,11 @@ jobs:
 
   Build:
     needs: Checkout
-    runs-on: ubuntu-latest
-    env:
-      MY_VAR: ${{ needs.Checkout.outputs.my_var }}
-      USER: ${{ needs.Checkout.outputs.user }}
-    steps:
-      - name: Run Build
-        uses: ankgoya1/pr/.github/workflows/build.yml@main
+    uses: ankgoya1/pr/.github/workflows/build.yml@main
 
   Publish:
     needs: Build
-    runs-on: ubuntu-latest
-    env:
-      MY_VAR: ${{ needs.Checkout.outputs.my_var }}
-      USER: ${{ needs.Checkout.outputs.user }}
-    steps:
-      - name: Run Publish
-        uses: ankgoya1/pr/.github/workflows/publish.yml@main
+    uses: ankgoya1/pr/.github/workflows/publish.yml@main
+    with:
+      MY_VAR: ${{ needs.Build.outputs.my_var }}
+      USER: ${{ needs.Build.outputs.user }}
