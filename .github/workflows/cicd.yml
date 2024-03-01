@@ -5,20 +5,23 @@ on:
     branches:
       - main
 
+env:
+  MY_VAR: Testing
+
 jobs:
   Variables:
-    env:
-      MY_VAR: Testing
     runs-on: ubuntu-latest
     outputs:
       my_var: ${{ steps.set_output.outputs.MY_VAR }}
+      user: Ankit
 
     steps: 
       - name: Set output variables
         id: set_output
         run: |
           echo "::set-output name=MY_VAR::${MY_VAR}"
-          
+          echo "::set-output name=USER::${USER}"
+
   Print:
     needs: Variables
     runs-on: ubuntu-latest
@@ -39,4 +42,3 @@ jobs:
       pass: ${{ secrets.GIT_PASS }}
     with:  
       my_var: ${{ env.MY_VAR }}
-
