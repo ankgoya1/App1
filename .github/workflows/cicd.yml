@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-env:
-  name: ${{ vars.NAME }} 
+# env:
+#   name: ${{ vars.NAME }} 
 
 jobs:
 
@@ -20,4 +20,4 @@ jobs:
       pass: ${{ secrets.GIT_PASS }}
     with:  
       user: Ankit
-      name: ${{ env.name }}
+      name: ${{ vars.name }}
