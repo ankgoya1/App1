@@ -4,33 +4,9 @@ on:
   push:
     branches:
       - main
-
 jobs:
-  Variables:
-    runs-on: ubuntu-latest
-    outputs:
-      my_var: ${{ steps.set_output.outputs.MY_VAR }}
-      user: Ankit
-
-    steps: 
-      - name: Set output variables
-        id: set_output
-        run: |
-          echo "::set-output name=MY_VAR::${MY_VAR}"
-          echo "::set-output name=USER::${USER}"
-        env:
-          MY_VAR: Testing
-
-  Print:
-    needs: Variables
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print Value
-        run: |
-          echo "value is : ${{ needs.Variables.outputs.my_var }}"
 
   Checkout:
-    needs: Print
     uses: ankgoya1/pr/.github/workflows/checkout.yml@main
 
   Publish:
@@ -40,4 +16,4 @@ jobs:
       token: ${{ secrets.USER }}
       pass: ${{ secrets.GIT_PASS }}
     with:  
-      my_var: ${{ needs.Variables.outputs.my_var }}
+      user: Ankit
