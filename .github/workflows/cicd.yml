@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Print Value
         run: |
-          echo "value is : $MY_VAR"
+          echo "value is : ${{ env.MY_VAR }}"
 
   Checkout:
     needs: Print
