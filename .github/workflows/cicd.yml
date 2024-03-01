@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+env:
+  name: ${{ vars.NAME }} 
+
 jobs:
 
   Checkout:
@@ -17,3 +20,4 @@ jobs:
       pass: ${{ secrets.GIT_PASS }}
     with:  
       user: Ankit
+      name: ${{ env.name }}
