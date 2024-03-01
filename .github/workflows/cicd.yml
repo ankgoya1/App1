@@ -21,3 +21,4 @@ jobs:
     with:  
       user: Ankit
       name: ${{ vars.name }}
+      mname: ${{ vars.mname }}
