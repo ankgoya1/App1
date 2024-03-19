@@ -21,8 +21,8 @@ on:
   push:
     paths-ignore:
       - '**.md'
-      - '.github/workflows/*.yaml'
-      - '.github/workflows/app.yaml'     
+      - '.github/workflows/*.yml'
+      - '.github/workflows/app.yml'     
     branches: [ 'release', 'release/*', 'feature/*' ]
   pull_request:
     branches: [ "release" ]
