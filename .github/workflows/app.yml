@@ -30,7 +30,7 @@ on:
       - closed
     paths-ignore:
       - '**/*.md'
-      - '**/*.yaml'
+      - '**/*.yml'
 jobs:
 
   Checkout:
