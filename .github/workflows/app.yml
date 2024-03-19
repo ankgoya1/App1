@@ -1,0 +1,33 @@
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+        description: Environment
+      full:
+        type: boolean
+        description: Deploy ALL environments
+      cloud:
+        type: boolean
+        description: Cloud runner (default false)
+  # workflow_run:
+  #   workflows: ["Pull Request Handler"]
+  #   types:
+  #     - completed
+  release:
+    types:
+      - created
+  push:
+    paths-ignore:
+      - '**.md'
+      - '.github/workflows/*.yaml'
+      - '.github/workflows/app.yaml'
+    branches: [ 'release', 'release/*', 'feature/*' ]
+  pull_request:
+    branches: [ "release" ]
+    types:
+      - closed
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.yaml'
