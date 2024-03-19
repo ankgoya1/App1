@@ -23,6 +23,21 @@ on:
       - '**.md'
       - '.github/workflows/*.yaml'
       - '.github/workflows/app.yaml'
+jobs:
+
+  Checkout:
+    uses: ankgoya1/pr/.github/workflows/checkout.yml@main
+
+  Publish:
+    needs: Checkout
+    uses: ankgoya1/pr/.github/workflows/publish.yml@main
+    secrets:
+      token: ${{ secrets.USER }}
+      pass: ${{ secrets.GIT_PASS }}
+    with:  
+      user: Ankit
+      name: ${{ vars.name }}
+      mname: ${{ vars.mname }}      
     branches: [ 'release', 'release/*', 'feature/*' ]
   pull_request:
     branches: [ "release" ]
