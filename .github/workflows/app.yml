@@ -72,20 +72,31 @@ jobs:
       #     -H "X-GitHub-Api-Version: 2022-11-28" \
       #     https://api.github.com/repos/ankgoya1/App1/actions/variables/BC_3_BUILD_VERSION \
       #     -d '{"name":"BC_3_BUILD_VERSION","value":"370"}'  
-      - name: Update Variable
-        env:
-          TOKEN: ${{ secrets.GIT_PASS }} # Access token for repo
-        run: |
-          $uri = "https://api.github.com/repos/ankgoya1/App1/actions/variables/BC_3_BUILD_VERSION"
-          $headers = @{
-            "Accept" = "application/vnd.github+json"
-            "Authorization" = "Bearer $env:TOKEN"
-            "X-GitHub-Api-Version" = "2022-11-28"
-          }
-          $body = @{
-            "name" = "BC_3_BUILD_VERSION"
-            "value" = "371"
-          } | ConvertTo-Json
+      # - name: Update Variable
+      #   env:
+      #     TOKEN: ${{ secrets.GIT_PASS }} # Access token for repo
+      #   run: |
+      #     $uri = "https://api.github.com/repos/ankgoya1/App1/actions/variables/BC_3_BUILD_VERSION"
+      #     $headers = @{
+      #       "Accept" = "application/vnd.github+json"
+      #       "Authorization" = "Bearer $env:TOKEN"
+      #       "X-GitHub-Api-Version" = "2022-11-28"
+      #     }
+      #     $body = @{
+      #       "name" = "BC_3_BUILD_VERSION"
+      #       "value" = "371"
+      #     } | ConvertTo-Json
       
-          Invoke-RestMethod -Uri $uri -Method Patch -Headers $headers -Body $body
+      #     Invoke-RestMethod -Uri $uri -Method Patch -Headers $headers -Body $body
 
+      
+      - name: Update BC Version variable
+        uses: indiesdev/curl@v1.1
+        with:
+          url: https://api.github.com/repos/${{ github.repository }}/actions/variables/BC_3_BUILD_VERSION
+          headers: '{ "Authorization": "Bearer ${{ secrets.GIT_PASS  }}" }'
+          method: "PATCH"
+          timeout: 10000
+          accept: 204
+          body: '{ "name": "BC_3_BUILD_VERSION", "value": "400" }'
+          log-response: true
