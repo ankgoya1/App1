@@ -65,8 +65,10 @@ jobs:
         env:
           TOKEN: ${{ secrets.GIT_PASS }} # Access token for repo
         run: |
-          curl -X PATCH \
-            -H "Authorization: Bearer $TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/angoya1/App1/actions/variables/BC_3_BUILD_VERSION \
-            -d '{"encrypted_value": "369", "key_id": "BC_3_BUILD_VERSION"}'
+          curl -L \
+          -X PATCH \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer $TOKEN" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          https://api.github.com/repos/ankgoya1/App1/actions/variables/BC_3_BUILD_VERSION \
+          -d '{"name":"BC_3_BUILD_VERSION","value":"369"}'   
