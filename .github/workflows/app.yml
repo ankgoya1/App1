@@ -66,7 +66,7 @@ jobs:
           TOKEN: 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 # Access token for repo
         run: |
           curl -X PATCH \
-            -H "Authorization: token $TOKEN" \
+            -H "Authorization: Bearer $TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/angoya1/App1/actions/cariables/BC_3_BUILD_VERSION \
             -d '{"encrypted_value": "369", "key_id": "BC_3_BUILD_VERSION"}'
