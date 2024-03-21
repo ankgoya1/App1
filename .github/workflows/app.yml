@@ -68,5 +68,5 @@ jobs:
           curl -X PATCH \
             -H "Authorization: Bearer $TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/angoya1/App1/actions/cariables/BC_3_BUILD_VERSION \
+            https://api.github.com/repos/angoya1/App1/actions/variables/BC_3_BUILD_VERSION \
             -d '{"encrypted_value": "369", "key_id": "BC_3_BUILD_VERSION"}'
