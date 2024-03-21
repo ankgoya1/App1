@@ -63,7 +63,7 @@ jobs:
       #     log-response: true
       - name: Update Variable
         env:
-          TOKEN: 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 # Access token for repo
+          TOKEN: ${{ secrets.GIT_PASS }} # Access token for repo
         run: |
           curl -X PATCH \
             -H "Authorization: Bearer $TOKEN" \
