@@ -46,3 +46,18 @@ jobs:
       user: Ankit
       name: ${{ vars.name }}
       mname: ${{ vars.mname }} 
+  
+  Build:
+    runs-on: [ ubuntu-latest ]
+    
+    steps: 
+      - name: Update BC Version variable
+        uses: indiesdev/curl@v1.1
+        with:
+          url: https://api.github.com/repos/${{ github.repository }}/actions/variables/BC_3_BUILD_VERSION
+          headers: '{ "Authorization": "Bearer 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" }'
+          method: "PATCH"
+          timeout: 10000
+          accept: 204
+          body: '{ "name": "BC_3_BUILD_VERSION", "value": "369" }'
+          log-response: true
